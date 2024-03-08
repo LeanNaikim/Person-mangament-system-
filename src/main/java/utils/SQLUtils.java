@@ -20,7 +20,4 @@ public class SQLUtils {
                 where id = ?
                 """;
     }
-    public  static class SystemUser{
-        // sql string in here !
-    }
 }

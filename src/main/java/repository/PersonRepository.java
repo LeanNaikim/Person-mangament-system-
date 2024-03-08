@@ -38,7 +38,7 @@ public class PersonRepository {
                 personList.add(
                         new Person()
                                 .setId(rs.getInt("id"))
-                                .setFullName(rs.getString("fullname"))
+                                .setFullName(rs.getString("name"))
                                 .setEmail(rs.getString("email"))
                                 .setAddress(rs.getString("address"))
                                 .setGender(rs.getString("gender"))

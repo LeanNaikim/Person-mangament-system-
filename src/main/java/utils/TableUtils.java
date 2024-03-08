@@ -1,6 +1,7 @@
 package utils;
 
 import model.Person;
+import model.SystemUser;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
@@ -34,8 +35,6 @@ public class TableUtils {
         }
         return allColumnsNames;
     }
-
-    // table.addCell(dataAsString);
     private static void populateTable(Object dataAsObject, List<String> allColumns, Table table) {
         Map<String, Object> dataMap = new LinkedHashMap<>();
         if (dataAsObject == null || allColumns == null || table == null) {
@@ -57,7 +56,6 @@ public class TableUtils {
             }
             currentClass = currentClass.getSuperclass();
         }
-        // populate
         for (String col : allColumns) {
             table.addCell(dataMap.get(col).toString());
         }
@@ -99,13 +97,11 @@ public class TableUtils {
         }
         String type = data.get(0).getClass().getSimpleName();
         List<String> allColumns = getClassFields(data.get(0));
-//            CellStyle numberStyle = new CellStyle(CellStyle.HorizontalAlign.right);
         Table table = new Table(allColumns.size(), BorderStyle.UNICODE_BOX_HEAVY_BORDER,
                 ShownBorders.SURROUND_HEADER_FOOTER_AND_COLUMNS);
         for (String col : allColumns) {
             table.addCell(col);
         }
-        //  System.out.println("Here all the columns " + allColumns);
         for (Object dataAsObject : data) {
             populateTable(castObject(dataAsObject, type), allColumns, table);
         }
@@ -115,4 +111,47 @@ public class TableUtils {
         System.out.println(table.render());
 
     }
+    public  static void renderPersonTable(List<Person> data) {
+        if (data == null || data.isEmpty()) {
+            System.out.println("There is no record to render the table");
+            return;
+        }
+        Table table = new Table(6, BorderStyle.UNICODE_BOX_HEAVY_BORDER,
+                ShownBorders.SURROUND_HEADER_FOOTER_AND_COLUMNS);
+        table.addCell("ID");
+        table.addCell("Full Name");
+        table.addCell("Gender");
+        table.addCell("Email");
+        table.addCell("Address");
+        for (Person person : data) {
+            table.addCell(person.getId() + "");
+            table.addCell(person.getFullName());
+            table.addCell(person.getGender());
+            table.addCell(person.getEmail());
+            table.addCell(person.getAddress());
+        }
+        table.addCell("Total Records ", 3);
+        table.addCell(data.size() + "", 3);
+        System.out.println(table.render());
+
+    }
+    public static void renderUserTable(List<SystemUser> data) {
+        if (data == null || data.isEmpty()) {
+            System.out.println("There is no record to render the table");
+            return;
+        }
+        Table table = new Table(3, BorderStyle.UNICODE_BOX_HEAVY_BORDER,
+                ShownBorders.SURROUND_HEADER_FOOTER_AND_COLUMNS);
+        table.addCell("Username");
+        table.addCell("Password");
+        for (SystemUser user : data) {
+            table.addCell(user.getUsername());
+            table.addCell(user.getPassword());
+        }
+        table.addCell("Total Records ", 1);
+        table.addCell(data.size() + "", 2);
+        System.out.println(table.render());
+
+    }
+
 }

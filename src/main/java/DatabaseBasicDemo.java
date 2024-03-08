@@ -18,6 +18,8 @@ public class DatabaseBasicDemo {
           while(resultSet.next()){
               System.out.println("Person ID:"+resultSet.getInt("id"));
               System.out.println("Person Name:"+resultSet.getString("fullname"));
+              System.out.println("Person Email :"+resultSet.getString("email"));
+              System.out.println("Person Address:"+resultSet.getString("address"));
               System.out.println("Person Gender :"+resultSet.getString("gender"));
               System.out.println("-----------------------------------------");
           }

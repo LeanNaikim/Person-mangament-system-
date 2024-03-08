@@ -14,12 +14,11 @@ public class SystemUser {
     private String username;
     private String password;
 
-    public SystemUser user() {
-        Scanner scanner = new Scanner(System.in);
+    public SystemUser user(Scanner input) {
         System.out.println("Enter username: ");
-        String username = scanner.nextLine();
+        String username = input.nextLine();
         System.out.println("Enter password: ");
-        String password = scanner.nextLine();
+        String password = input.nextLine();
         return this;
     }
 }
